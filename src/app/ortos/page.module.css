@@ -1,0 +1,29 @@
+.paginaprincipal {
+    display: inline-block;
+    position: relative;
+  }
+.paginaprincipal h1 {
+    position: absolute;
+    top: 300px;
+    right: 850px;
+    font-size: 60px;
+    color:black;
+}
+
+.paginaprincipal h3 {
+    position: absolute;
+    top: 450px;
+    right: 500px;
+    font-size: 40px;
+    color:black;
+}
+
+.paginaprincipal button {
+    position: absolute;
+    top: 550px;
+    right: 1350px;
+    font-size: 30px;
+    padding: 10px;
+    background-color: black;
+    border-radius: 10px;
+}

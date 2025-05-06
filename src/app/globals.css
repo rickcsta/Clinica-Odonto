@@ -41,6 +41,39 @@ a {
   }
 }
 
-.h2header{
-  color:#D4AF37
+.h2header {
+  color: #d4af37;
 }
+
+.header {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu h5 {
+  color: black;
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 40px;
+  margin-bottom: 30px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.logo-text {
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+

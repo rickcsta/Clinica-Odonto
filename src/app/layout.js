@@ -21,9 +21,20 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <header>
-          <div>
-          <h2 class="h2header">Ortos</h2>
-          <h3>Odontologia Especializada</h3>
+          <div className="header">
+            <div className="logo">
+              <img src="/logoortos.png" width="50px" height="50px" />
+              <div className="logo-text">
+                <h2 className="h2header">Ortos</h2>
+                <h3>Odontologia Especializada</h3>
+              </div>
+            </div>
+            <div className="menu">
+              <h5>Procedimentos</h5>
+              <h5>Localizaçâo</h5>
+              <h5>Sobre</h5>
+              <h5>Dúvidas</h5>
+            </div>
           </div>
         </header>
         {children}
