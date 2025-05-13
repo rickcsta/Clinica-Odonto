@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
               </div>
             </div>
             <div className="menu">
-              <h5>Procedimentos</h5>
+             <a href="#procedimentos"> <h5>Procedimentos</h5></a>
               <h5>Localizaçâo</h5>
               <h5>Sobre</h5>
               <h5>Dúvidas</h5>

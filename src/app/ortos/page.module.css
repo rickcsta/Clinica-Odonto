@@ -27,3 +27,47 @@
     background-color: black;
     border-radius: 10px;
 }
+
+.imgdescrip{
+    display: flex;
+    justify-content: space-evenly;
+}
+.procedimentos{
+        background-color: white;
+        color: black;
+}
+.dourado{
+        color: #d4af37;
+}
+
+.procedimentos h2{
+        text-align: center;
+}
+
+.ladoesq h3{
+    text-align: center;
+    color: #d4af37;
+}
+
+.ladoesq p{
+    text-align: center;
+    width: 400px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+.ladodir h3{
+    text-align: center;
+    color: #d4af37;
+}
+
+.ladodir p{
+    text-align: center;
+    width: 400px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+.imagem{
+    border-radius: 30px;
+}
+
