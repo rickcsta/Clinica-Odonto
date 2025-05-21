@@ -47,12 +47,10 @@ export default () => {
 </div>
 
 <div className={style.localizacao} id="localizacao">
-  <h2 className={style.dourado}>Nossa</h2>
-  <h2>Localização</h2>
-  <h2>↓</h2>
   <div className={style.geral}>
     <div className={style.endereco}>
-      <h1>Dentista em Esperança - PB</h1>
+      <h1>Localização</h1>
+      <p>Dentista em Esperança - PB</p>
       <p>R. Manoel Rodrigues de Oliveira, 411 - Centro</p>
       <p>Esperança - PB</p>
       <p>CEP: 58135-000</p>

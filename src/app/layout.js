@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
             </Link>
             <div className="menu">
              <Link href="../ortos#procedimentos"> <h5>Procedimentos</h5></Link>
-              <Link href="../ortos#localizacao"> <h5>Localizaçâo</h5> </Link>
+              <Link href="../ortos#localizacao"> <h5>Localização</h5> </Link>
               <h5>Sobre</h5>
               <h5>Dúvidas</h5>
             </div>
