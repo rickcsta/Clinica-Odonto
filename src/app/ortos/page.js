@@ -13,7 +13,7 @@ export default () => {
         <a href="/ortos/cadastro"><button>Consulte-se</button></a>
       </div>
 
-      <div className={style.procedimentos}>
+      <div className={style.procedimentos} id="procedimentos">
         <h2 className={style.dourado}>Conheça nossos</h2>
         <h2>Procedimentos</h2>
         <div className={style.imgdescrip}>
@@ -32,7 +32,7 @@ export default () => {
             <p>O clareamento dental é um procedimento estético que visa melhorar a cor dos dentes, removendo manchas e deixando-os mais brancos e brilhantes.
 </p>
           </div>
-          <div className="proc-img" id="procedimentos"><img className={style.imagem} src="/procedimento.JPG" width="431" height="646" /></div>
+          <div className="proc-img" ><img className={style.imagem} src="/procedimento.JPG" width="431" height="646" /></div>
           <div className={style.ladodir}>
             <h3>Implantes Dentários</h3>
             <p>Um implante dentário é uma solução utilizada para substituir dentes perdidos ou danificados.</p>
@@ -45,7 +45,7 @@ export default () => {
           </div>
         </div>
       </div>
-      <div className={style.localizacao}>
+      <div className={style.localizacao} id="localizacao">
         <h2 className={style.dourado}>Nossa</h2>
         <h2>Localização</h2>
         <div className={style.mapft}>
