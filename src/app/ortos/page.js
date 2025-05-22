@@ -5,7 +5,6 @@ export default () => {
     <>
     
 <div className={style.paginaprincipal}>
-  <img className={style.dentistaprin} src="/dentistaprincipal.png" alt="Dentista" />
   <div className={style.conteudo}>
     <h1>Seu sorriso, nossa maior satisfação.</h1>
     <h3>
@@ -15,6 +14,12 @@ export default () => {
       <button>Consulte-se</button>
     </a>
   </div>
+  <div className={style.gradienteCentro}></div>
+  <img
+    className={style.dentistaprin}
+    src="/dentistaprincipal.png"
+    alt="Dentista"
+  />
 </div>
 
 <div className={style.procedimentos} id="procedimentos">

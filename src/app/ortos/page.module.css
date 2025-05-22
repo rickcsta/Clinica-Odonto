@@ -6,49 +6,51 @@
 /*css apenas do dentista, tetxos, e botões*/
 
 .paginaprincipal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
     width: 100%;
     height: 100vh;
     overflow: hidden;
 }
 
-.dentistaprin {
+.gradienteCentro {
     position: absolute;
-    top: 0;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    z-index: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #d4af37 50%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .conteudo {
     width: 50%;
-    position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    height: 100%;
-    padding-left: 5%;
     gap: 20px;
+    padding-left: 5%;
+    z-index: 2;
 }
 
-.conteudo h1{
+.conteudo h1 {
     color: black;
-    font-size: 60px;
+    font-size: clamp(30px, 5vw, 60px);
 }
 
 .conteudo h3 {
-    font-size: 30px;
+    font-size: clamp(18px, 3vw, 30px);
     color: black;
 }
 
 .conteudo button {
-    font-size: 30px;
-    padding: 10px;
-    background-color:#878787;
+    font-size: clamp(16px, 2.5vw, 30px);
+    padding: 10px 20px;
+    background-color: #878787;
     color: white;
     border: none;
     border-radius: 10px;
@@ -58,6 +60,13 @@
 
 .conteudo button:hover {
     background-color: #d4af37;
+}
+
+.dentistaprin {
+    width: 50%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0;
 }
 
 /*css da parte de procedimentos*/
