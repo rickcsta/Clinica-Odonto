@@ -74,7 +74,8 @@
 /*css da parte de procedimentos*/
 
 .procedimentos {
-  padding: 50px 5%;
+  padding-top: 50px;
+  padding-bottom: 50px;
   background-color: #878787;
   color: black;
   text-align: center;
@@ -82,39 +83,9 @@
   border-bottom-right-radius: 50% 2%
 }
 
-.imgdescrip {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-top: 30px;
-}
-
-.ladoesq, .ladodir {
-  padding-top: 5%;
-  flex: 1;
-  min-width: 300px;
-}
-
-.ladoesq p, .ladodir p {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    color: black;
-    font-size: 20px;
-}
-
-.ladoesq h3, .ladodir h3 {
-    text-decoration: underline;
-    font-size: 20px;
-    font-weight: bold;
-    color: #d4af37;
-}
-
-.imagem {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
+.carouselWrapper{
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 /*css parte da localização*/

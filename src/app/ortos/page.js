@@ -26,14 +26,9 @@ export default function Home() {
         <h2 className={style.dourado}>Conheça nossos</h2>
         <h2>Procedimentos</h2>
         <h2>↓</h2>
-
-        
         <div className={style.carouselWrapper}>
           <Carousel />
         </div>
-
-
-
       </div>
 
       <div className={style.localizacao} id="localizacao">
