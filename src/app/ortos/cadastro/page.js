@@ -1,4 +1,5 @@
 import style from "./page.module.css";
+import Link from 'next/link'
 
 export default () => {
   return (
@@ -13,7 +14,7 @@ export default () => {
               <input className="input" type="text" placeholder="Endereço" /> 
               <input className="input" type="tel" placeholder="Contato" />
               <input className="input" type="password" placeholder="Senha" />
-             <a href="/ortos/login"><p>Ja tem uma conta? Entre</p>       </a> 
+             <Link href="/ortos/login"><p>Ja tem uma conta? Entre</p>       </Link> 
               <button className="botao" type="button" placeholder="Agendar">Criar</button>
             </div>
         </div>

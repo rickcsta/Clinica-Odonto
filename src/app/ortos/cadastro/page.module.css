@@ -45,4 +45,10 @@
 }
 .entradas p {
     margin-left: 68% ;
+ 
+     color: blue;
 }
+
+.entradas p:hover{
+    text-decoration: underline;
+} 

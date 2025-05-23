@@ -1,4 +1,5 @@
 import style from "./page.module.css";
+import Link from 'next/link'
 
 export default () => {
   return (
@@ -9,7 +10,7 @@ export default () => {
             <div className={style.entradas}>
               <input className="input" type="text" placeholder="CPF" />   
               <input className="input" type="text" placeholder="Senha" />
-              <p>Esqueceu sua senha?</p>       
+              <Link href="#"><p>Esqueceu sua senha?</p></Link>      
               <button className="botao" type="button" placeholder="Agendar">Criar</button>
             </div>
 
