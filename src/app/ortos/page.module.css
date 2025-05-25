@@ -71,6 +71,59 @@
     z-index: 0;
 }
 
+/*css apenas do dentista, tetxos, e botões mobile*/
+
+@media (max-width: 768px) { 
+.paginaprincipal{
+flex-direction: column;
+min-width: 300px;
+}
+ .gradienteCentro {
+    background: linear-gradient(  #d4af37 40%, rgba(255, 255, 255, 0) 65%);
+    z-index: 1;
+}
+
+ .conteudo {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+.conteudo h1 {
+    color: black;
+    font-size: 30px;
+    text-align: center
+    
+}
+
+.conteudo h3 {
+    font-size: 18px;
+    color: black;
+    text-align: center
+}
+
+.conteudo button {
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #878787;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+ .dentistaprin {
+    position: absolute;
+    top: 250px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+ }
+
 /*css da parte de procedimentos*/
 
 .procedimentos {

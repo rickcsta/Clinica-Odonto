@@ -17,7 +17,7 @@ export default function Home() {
         <div className={style.gradienteCentro}></div>
         <img
           className={style.dentistaprin}
-          src="/dentistaprincipal.png"
+          src="/dentistaprincipal.jpg"
           alt="Dentista"
         />
       </div>
