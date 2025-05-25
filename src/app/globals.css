@@ -43,6 +43,14 @@ a {
 
 /*cabeçalho*/
 
+.hamburguer {
+  display: none;
+  font-size: 28px;
+  margin-top: 10px;
+  margin-right: 20px;
+  user-select: none;
+}
+
 .h2header {
   color: #d4af37;
 }
@@ -80,6 +88,35 @@ a {
   display: flex;
   flex-direction: column;
 }
+
+
+/* mobile */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+    position: absolute;
+    top: 70px; 
+    right: 10px;
+    background: white;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 10;
+  }
+
+  .menu.open {
+    display: flex;
+  }
+
+  .menu h5 {
+    margin: 10px 20px; 
+  }
+
+  .hamburguer {
+    display: block;
+  }
+}
+
 
 /*botoes slides pag pincipal*/
 
