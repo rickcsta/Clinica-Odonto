@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
               <div className="logo">
                 <img src="/logoortos.png" width="50" height="50" alt="Logo" />
                 <div className="logo-text">
-                  <h2 className="h2header">Ortos</h2>
+                  <h2 className="h2ortos">Ortos</h2>
                   <h3>Odontologia Especializada</h3>
                 </div>
               </div>
@@ -40,6 +40,33 @@ export default function RootLayout({ children }) {
         </header>
 
         {children}
+
+        <footer>
+          <div className='rodape'>
+            <Link href="/ortos">
+            <div className="logo">
+                <img src="/logoortos.png" width="50" height="50" alt="Logo" />
+                <div className="logo-text">
+                  <h2 className="h2ortos">Ortos</h2>
+                  <h3>Odontologia Especializada</h3>
+                </div>
+            </div>
+            </Link>
+
+            <div className="icones">
+              <div className="zap">
+              <Link href="https://api.whatsapp.com/send?phone=5583999640954&text=" target="_blank" rel="noopener noreferrer">
+                <img src='/zapicon.png' width="20" height="20" alt="zap"></img>
+              </Link>
+            </div>
+            <div className="insta">
+              <Link href="https://www.instagram.com/ortosodontologia/" target="_blank" rel="noopener noreferrer">
+                <img src='/instaicon.png' width="20" height="20" alt="insta"></img>
+              </Link>
+            </div>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );

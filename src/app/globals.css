@@ -51,11 +51,11 @@ a {
   user-select: none;
 }
 
-.h2header {
+.h2ortos {
   color: #d4af37;
 }
 
-.header {
+.header{
   padding: 5px;
   background-color: white;
   display: flex;
@@ -75,7 +75,7 @@ a {
   margin-bottom: 30px;
 }
 
-.logo {
+.logo{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,6 +116,23 @@ a {
     display: block;
   }
 }
+
+/*rodapé*/
+.rodape{
+  display: flex;
+  border-top: 1px solid;
+  padding: 5px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between
+}
+
+.icones{
+  margin-right: 5%;
+}
+
+
+
 
 
 /*botoes slides pag pincipal*/
