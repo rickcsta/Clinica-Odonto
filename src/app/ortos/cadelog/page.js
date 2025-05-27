@@ -5,7 +5,7 @@ export default () => {
   return (
     <>
      <div className={style.cadastro}>
-        <div className={style.quadrado}>
+        <div className={style.containercad}>
           <h1 className="titulo">Cadastre-se</h1>
             <div className={style.entradas}>
               <input className="input" type="text" placeholder="Nome" />
@@ -14,7 +14,18 @@ export default () => {
               <input className="input" type="text" placeholder="Endereço" /> 
               <input className="input" type="tel" placeholder="Contato" />
               <input className="input" type="password" placeholder="Senha" />
-             <Link href="/ortos/login"><p>Ja tem uma conta? Entre</p>       </Link> 
+              <button className="botao" type="button" placeholder="Agendar">Criar</button>
+            </div>
+        </div>
+      </div>
+
+      <div className={style.login}>
+        <div className={style.containerlog}>
+          <h1 className="titulo">Login</h1>
+            <div className={style.entradas}>
+              <input className="input" type="text" placeholder="CPF" />   
+              <input className="input" type="text" placeholder="Senha" />
+              <Link href="#"><p>Esqueceu sua senha?</p></Link>      
               <button className="botao" type="button" placeholder="Agendar">Criar</button>
             </div>
         </div>

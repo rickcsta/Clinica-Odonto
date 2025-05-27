@@ -10,7 +10,7 @@ export default function Home() {
           <h3>
             Todo mundo merece dentes saudáveis e um sorriso radiante sem gastar muito!
           </h3>
-          <a href="/ortos/cadastro">
+          <a href="/ortos/cadelog">
             <button>Consulte-se</button>
           </a>
         </div>
