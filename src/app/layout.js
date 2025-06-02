@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
       <body>
         <header>
           <div className="header">
-            <Link href="/ortos" onClick={() => setMenuOpen(false)}>
+            <Link href="/" onClick={() => setMenuOpen(false)}>
               <div className="logo">
                 <img src="/logoortos.png" width="50" height="50" alt="Logo" />
                 <div className="logo-text">
@@ -27,10 +27,10 @@ export default function RootLayout({ children }) {
             </div>
 
             <div className={`menu ${menuOpen ? 'open' : ''}`}>
-              <Link href="/ortos#procedimentos" onClick={() => setMenuOpen(false)}>
+              <Link href="/#procedimentos" onClick={() => setMenuOpen(false)}>
                 <h5>Procedimentos</h5>
               </Link>
-              <Link href="/ortos#localizacao" onClick={() => setMenuOpen(false)}>
+              <Link href="/#localizacao" onClick={() => setMenuOpen(false)}>
                 <h5>Localização</h5>
               </Link>
               <h5>Sobre</h5>
@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
 
         <footer>
           <div className='rodape'>
-            <Link href="/ortos">
+            <Link href="/">
             <div className="logo">
                 <img src="/logoortos.png" width="50" height="50" alt="Logo" />
                 <div className="logo-text">
