@@ -1,8 +1,8 @@
 'use client'
-
 import style from './page.module.css'
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function ClienteForm() {
   const [nome, setNome] = useState('')
@@ -11,6 +11,8 @@ export default function ClienteForm() {
   const [endereco, setEndereco] = useState('')
   const [contato, setContato] = useState('')
   const [senha, setSenha] = useState('')
+
+   const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -25,13 +27,9 @@ export default function ClienteForm() {
       })
 
       if (response.ok) {
-        alert('Cliente cadastrado com sucesso!')
-        setNome('')
-        setCpf('')
-        setNascimento('')
-        setEndereco('')
-        setContato('')
-        setSenha('')
+        const data = await response.json()
+        const id_cliente = data.id_cliente
+        router.push(`/perfil/${id_cliente}`)
       } else {
         const errorData = await response.json()
         alert(`Erro ao cadastrar cliente: ${errorData.error}`)

@@ -5,19 +5,24 @@ export default async ({params}) => {
     const cliente = await db.query("select * from cliente where id_cliente = "+params.id);
  return (<>
     <div className={style.geral}>
-        <div className={style.container}>
+     <div className={style.container}>
+        <div className={style.cima}><h1>{cliente.rows[0].nome}</h1></div>
+
+        <div className={style.baixo}>
+        <div className={style.left}>
             <div className={style.ftdeperfil}></div>
-            <div className={style.dados}>
-              <h1>Nome: {cliente.rows[0].nome}</h1>
-              <h1>CPF: {cliente.rows[0].cpf}</h1>
-              <h1>Data de Nascimento: {new Date(cliente.rows[0].nascimento).toLocaleDateString()}</h1>
-              <h1>Endereço: {cliente.rows[0].endereco}</h1>
-              <h1>Contato: {cliente.rows[0].contato}</h1>
-              <h1>Senha: {cliente.rows[0].senha}</h1>
-            </div>
+            <a href={`/dados/${cliente.rows[0].id_cliente}`}><p>Seus Dados</p></a>
         </div>
+         <div className={style.rigth}>
+            <button className={style.button}>Marcar Consulta</button>
+            <button className={style.button}>Ver Prescrições</button>
+            <button className={style.button}>Ver Prontuários</button>
+         </div>
+        </div>
+      </div>
     </div>
     </>
-  )
-}
+  );
+};
+
 

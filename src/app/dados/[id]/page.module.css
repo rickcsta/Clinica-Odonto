@@ -1,0 +1,36 @@
+.geral{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    overflow: hidden;
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    background-color: #878787;
+    padding: 50px;
+    border-radius: 30px;
+    width: 90%;
+    height: 800px;
+    box-shadow: 0 0 20px 0 #878787;
+}
+
+
+.ftdeperfil{
+    background-color: black;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 20%;
+}
+
+.dados{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dados h1{
+    padding: 30px;
+}
