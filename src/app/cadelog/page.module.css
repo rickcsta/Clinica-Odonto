@@ -38,6 +38,7 @@
 
 .botao:hover{
     background-color: #d4af37;
+    box-shadow: 0 0 20px 0 #d4af37;
 }
 
 
