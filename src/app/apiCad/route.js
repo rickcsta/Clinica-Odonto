@@ -1,13 +1,15 @@
 import { NextResponse } from 'next/server'
 import pool from "../lib/db"
 
+// cadastro 
+
 export async function POST(request) {
   try {
-    const { nome, cpf, nascimento, endereco, contato, senha } = await request.json()
+    const { nome, cpfcad, nascimento, endereco, contato, senhacad } = await request.json()
     const client = await pool.connect()
     const result = await client.query(
       'INSERT INTO cliente (nome, cpf, nascimento, endereco, contato, senha) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [nome, cpf, nascimento, endereco, contato, senha]
+      [nome, cpfcad, nascimento, endereco, contato, senhacad]
     )
 
     const id_cliente = result.rows[0].id_cliente
@@ -19,3 +21,7 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }
+
+
+
+

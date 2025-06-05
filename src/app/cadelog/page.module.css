@@ -1,3 +1,4 @@
+/*css maior que 1000px*/
 .container{
     display: flex;
     justify-content: space-around;
@@ -41,5 +42,61 @@
     box-shadow: 0 0 20px 0 #d4af37;
 }
 
+.meio{
+    margin-top: 20%;
+}
 
+/*css menor que 1000px*/
+
+@media (max-width: 1000px) {
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    align-items: center;
+}
+
+.cadastro, .login{
+    background-color: #878787;
+    width: 400px;
+    height: 600px;
+    border-radius: 30px;
+    box-shadow: 0 0 20px 0 #878787;
+    padding: 10px;
+    text-align: center;
+}
+
+
+
+.entradas{
+    display: flex;
+    flex-direction: column;
+   
+}
+.input{
+    margin: 20px;
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+    text-align: center;
+}
+
+.botao{
+    margin: 20px;
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.botao:hover{
+    background-color: #d4af37;
+    box-shadow: 0 0 20px 0 #d4af37;
+}
+
+.meio{
+    margin-bottom: 20%;
+}
+
+}
 
