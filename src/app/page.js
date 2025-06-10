@@ -24,7 +24,7 @@ export default function Home() {
 
       <div className={style.procedimentos} id="procedimentos">
         <h2 className={style.dourado}>Conheça nossos</h2>
-        <h2>Procedimentos</h2>
+        <h2>Procedimentos odontológicos</h2>
         <h2>↓</h2>
         <div className={style.carouselWrapper}>
           <Carousel />

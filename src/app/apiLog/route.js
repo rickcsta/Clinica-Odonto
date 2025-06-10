@@ -9,7 +9,7 @@ export async function POST(request) {
     const client = await pool.connect()
     const result = await client.query(
       'SELECT * FROM cliente WHERE cpf = $1 AND senha = $2',
-      [ cpflog, senhalog]
+      [cpflog, senhalog]
     )
 
     const id_cliente = result.rows[0].id_cliente

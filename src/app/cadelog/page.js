@@ -74,18 +74,18 @@ export default function ClienteForm() {
         <div className={style.containercad}>
           <h1 className="titulo">Cadastre-se</h1>
           <form className={style.entradas} onSubmit={handleCadastro}>
-            <input className={style.input} type="text" placeholder="Nome Completo" value={nome} onChange={(e) => setNome(e.target.value)} required />
-            <input className={style.input} type="number" placeholder="CPF" value={cpfcad} onChange={(e) => setCpfcad(e.target.value)} required />
-            <input className={style.input} type="date" placeholder="Data de Nascimento" value={nascimento} onChange={(e) => setNascimento(e.target.value)} required />
-            <input className={style.input} type="text" placeholder="Seu endereço" value={endereco} onChange={(e) => setEndereco(e.target.value)} required />
-            <input className={style.input} type="number" placeholder="Número para contato" value={contato} onChange={(e) => setContato(e.target.value)} required />
-            <input className={style.input} type="password" placeholder="Crie uma senha" value={senhacad} onChange={(e) => setSenhacad(e.target.value)} required />
+            <input className={style.input} type="text" title="Digite seu nome completo" placeholder="Nome Completo" value={nome} onChange={(e) => setNome(e.target.value)} required />
+            <input className={style.input} type="number" title="Digite seu CPF sem pontuação" placeholder="CPF" value={cpfcad} onChange={(e) => setCpfcad(e.target.value)} required />
+            <input className={style.input} type="date" title="Data de Nascimento" value={nascimento} onChange={(e) => setNascimento(e.target.value)} required />
+            <input className={style.input} type="text" title="Sua rua, seu bairro, e sua cidade" placeholder="Seu endereço" value={endereco} onChange={(e) => setEndereco(e.target.value)} required />
+            <input className={style.input} type="number" title="Numero para contato"  placeholder="(00) 90000-0000" value={contato} onChange={(e) => setContato(e.target.value)} required />
+            <input className={style.input} type="password" title="Crie uma senha forte" placeholder="Senha" value={senhacad} onChange={(e) => setSenhacad(e.target.value)} required />
             <button className={style.botao} type="submit">Criar e entrar</button>
           </form>
         </div>
       </div>
 
-      <div className={style.meio}><h1>ou</h1></div>
+      <div className={style.meio}><h1>OU</h1></div>
 
       <div className={style.login}>
         <div className={style.containerlog}>
