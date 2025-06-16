@@ -3,6 +3,7 @@ import style from './page.module.css'
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Calendario from '../../components/reactDatePicker';
 
 export default function ClienteForm() {
   const [nome, setNome] = useState('')
@@ -76,7 +77,7 @@ export default function ClienteForm() {
           <form className={style.entradas} onSubmit={handleCadastro}>
             <input className={style.input} type="text" title="Digite seu nome completo" placeholder="Nome Completo" value={nome} onChange={(e) => setNome(e.target.value)} required />
             <input className={style.input} type="number" title="Digite seu CPF sem pontuação" placeholder="CPF" value={cpfcad} onChange={(e) => setCpfcad(e.target.value)} required />
-            <input className={style.input} type="date" title="Data de Nascimento" value={nascimento} onChange={(e) => setNascimento(e.target.value)} required />
+            <Calendario className={style.input} selectedDate={nascimento} onDateChange={setNascimento} placeholder="Data de Nascimento" mode="birthdate" />
             <input className={style.input} type="text" title="Sua rua, seu bairro, e sua cidade" placeholder="Seu endereço" value={endereco} onChange={(e) => setEndereco(e.target.value)} required />
             <input className={style.input} type="number" title="Numero para contato"  placeholder="(00) 90000-0000" value={contato} onChange={(e) => setContato(e.target.value)} required />
             <input className={style.input} type="password" title="Crie uma senha forte" placeholder="Senha" value={senhacad} onChange={(e) => setSenhacad(e.target.value)} required />

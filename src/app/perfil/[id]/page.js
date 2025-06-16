@@ -1,4 +1,4 @@
-import db from "../../lib/db";
+import db from "../../../lib/db";
 import ClienteView from "./ClienteView"; 
 
 export default async function PerfilPage({ params }) {

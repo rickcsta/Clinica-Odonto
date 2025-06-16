@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react";
 import style from "./page.module.css";
+import Calendario from "../../../components/reactDatePicker";
 
 export default function ClienteView({ cliente }) {
   const [mostrarConsulta, setMostrarConsulta] = useState(false);
@@ -43,7 +44,7 @@ export default function ClienteView({ cliente }) {
         <div className={style.modalOverlay} onClick={fecharModal}>
           <div className={style.modal} onClick={e => e.stopPropagation()}>
             <h2>Agende sua consulta</h2>
-            
+            <Calendario></Calendario>
             <button onClick={fecharModal} className={style.fechar}>Fechar</button>
           </div>
         </div>

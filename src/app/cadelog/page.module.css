@@ -16,17 +16,29 @@
 }
 
 
-.entradas{
-    display: flex;
-    flex-direction: column;
-   
+.entradas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  width: 100%;
 }
-.input{
-    margin: 20px;
-    border-radius: 15px;
-    border: none;
-    padding: 10px;
-    text-align: center;
+
+.input, 
+.input input.react-datepicker__input-container input {
+  width: 300px !important;
+  height: 40px !important;
+  margin: 18px !important;
+  padding: 10px  !important;
+  border-radius: 15px !important;
+  border: none !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+  font-family: inherit !important;
+  font-size: 16px !important;
+  background-color: white !important;
+  cursor: pointer !important;
+  outline: none !important;
+  display: block !important;
 }
 
 .botao{

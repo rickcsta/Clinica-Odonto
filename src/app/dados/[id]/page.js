@@ -1,5 +1,5 @@
 import style from "./page.module.css";
-import db from "../../lib/db"
+import db from "../../../lib/db"
 
 export default async ({params}) => {
     const cliente = await db.query("select * from cliente where id_cliente = "+params.id);
