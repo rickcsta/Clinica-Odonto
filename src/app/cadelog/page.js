@@ -23,7 +23,7 @@ export default function ClienteForm() {
     const cliente = { nome, cpfcad, nascimento, endereco, contato, senhacad }
 
     try {
-      const response = await fetch('/apiCad', {
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cliente)
@@ -48,7 +48,7 @@ export default function ClienteForm() {
     e.preventDefault()
 
     try {
-      const response = await fetch('/apiLog', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cpflog, senhalog })
