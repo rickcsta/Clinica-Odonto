@@ -8,21 +8,32 @@ export default function ClienteView({ cliente }) {
   return (
     <div className={style.geral}>
       <div className={style.container}>
-        <div className={style.cima}></div>
-
-        <div className={style.baixo}>
-          <div className={style.left}>
+        <div className={style.cima}>
+            <div className={style.esquerda}>
             <div className={style.ftdeperfil}></div>
-              <p>{cliente.nome}</p>
+              <h2>{cliente.nome}</h2>
               <p>{cliente.contato}</p>
               <p>{new Date(cliente.nascimento).toLocaleDateString()}</p> {/*fazer calculo e colocar idade*/}
-          </div>
+            </div>
+            <div className={style.direita}>
+              <h1>Consulta Agendada - xx/xx/xx</h1> {/* colocar consultas aqui */}
+              <button className={style.botao}>Alterar data ou hora</button>
+              <button className={style.botao}>Cancelar</button>
+            </div>  
+        </div>
 
-          <div className={style.rigth}>
-            <button className={style.button}>Marcar Consulta</button>
-            <button className={style.button}>Ver Prescrições</button>
-            <button className={style.button}>Ver Prontuários</button>
-          </div>
+          <div className={style.baixo}>
+            <div className={style.esquerda}>
+              <p>xx</p> {/* colocar consultas aqui */}
+              <p>Consultas Realizadas</p>
+              <button className={style.botao}>Ver Prontuários</button>
+              <button className={style.botao}>Nova Consulta</button>
+            </div>
+            <div className={`${style.direita} ${style.direitaBaixo}`}>
+              <h3>Observações</h3>
+              <p>alergico adfhefueufh</p>
+              <p>alergico adfhfgfdwsfh</p>
+            </div>
         </div>
       </div>
     </div>

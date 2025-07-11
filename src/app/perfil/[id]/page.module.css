@@ -1,44 +1,3 @@
-/*css janela sobreposição*/
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(4px);
-  background-color: rgba(0, 0, 0, 0.5); 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999; 
-}
-
-.modal {
-  background-color: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-}
-
-.fechar {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #878787;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.fechar:hover {
-  background-color: #d4af37;
-  box-shadow: 0 0 20px 0 #d4af37;
-}
-
-/*css pagina em si*/
 .geral{
     display: flex;
     justify-content: center;
@@ -57,49 +16,73 @@
     box-shadow: 0 0 20px 0 #878787;
 }
 
-.baixo{
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10%;
+.cima, .baixo {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 25px;
+  margin-top: 50px;
 }
 
-.rigth{
-    display: flex;
-    flex-direction: column;
+.esquerda {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.cima{
-    text-align: center;
-    font-size: 25px;
+.direita {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
-.ftdeperfil{
-    background-color: black;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
+.ftdeperfil {
+  width: 160px;
+  height: 160px;
+  background-color: #000;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
-.button{
-    margin: 20px;
+.esquerda h2 {
+  font-size: 30px;
+  margin: 10px 0 5px;
+}
+
+.esquerda p {
+  margin: 3px 0;
+  font-size: 0.95rem;
+  color: #000;
+}
+
+/* Botões */
+.botao{
+    margin: 15px;
     border-radius: 15px;
     border: none;
-    padding: 30px;
+    padding: 20px;
     cursor: pointer;
 }
 
-.button:hover{
+.botao:hover{
     background-color: #d4af37;
     box-shadow: 0 0 20px 0 #d4af37;
 }
 
-.left {
-    margin-top: 5%;
-    display: flex;
-    flex-direction: column;
+.direita h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.left p{
-    text-align: center;
-    margin-top: 20px;
+.direita h3 {
+  font-weight: bold;
+  margin-bottom: 5%;
 }
+
+.direitaBaixo {
+  margin-right: 6%;
+}
+
