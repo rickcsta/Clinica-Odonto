@@ -14,12 +14,22 @@ const CustomInput = forwardRef(({ value, onClick, placeholder, className }, ref)
   />
 ));
 
-function Calendario({ selectedDate, onDateChange, placeholder = "Selecione a data", mode = "default", className }) {
+function Calendario({
+  selectedDate,
+  onDateChange,
+  placeholder = "Selecione a data",
+  mode = "default",
+  className,
+}) {
   const hoje = new Date();
 
   let minDate = null;
   let maxDate = null;
   let filterDate = null;
+  let showTimeSelect = false;
+  let timeIntervals = 60;
+  let timeFormat = "HH:mm";
+  let dateFormat = "dd/MM/yyyy";
 
   if (mode === "birthdate") {
     maxDate = hoje;
@@ -27,7 +37,8 @@ function Calendario({ selectedDate, onDateChange, placeholder = "Selecione a dat
     minDate.setFullYear(hoje.getFullYear() - 120);
   } else if (mode === "schedule") {
     minDate = hoje;
-    maxDate = null;
+    showTimeSelect = true;
+    dateFormat = "dd/MM/yyyy HH:mm";
 
     filterDate = (date) => {
       const day = date.getDay();
@@ -39,7 +50,7 @@ function Calendario({ selectedDate, onDateChange, placeholder = "Selecione a dat
     <DatePicker
       selected={selectedDate}
       onChange={onDateChange}
-      dateFormat="dd/MM/yyyy"
+      dateFormat={dateFormat}
       placeholderText={placeholder}
       minDate={minDate}
       maxDate={maxDate}
@@ -47,10 +58,17 @@ function Calendario({ selectedDate, onDateChange, placeholder = "Selecione a dat
       showYearDropdown={mode === "birthdate"}
       scrollableYearDropdown={mode === "birthdate"}
       yearDropdownItemNumber={100}
+      showTimeSelect={showTimeSelect}
+      timeIntervals={timeIntervals}
+      timeFormat={timeFormat}
       customInput={<CustomInput className={className} placeholder={placeholder} />}
       locale={ptBR}
     />
   );
 }
 
+
 export default Calendario;
+
+
+
