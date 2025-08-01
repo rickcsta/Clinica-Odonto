@@ -5,17 +5,28 @@ import Calendario from "../../../components/reactDatePicker";
 
 export default function ClienteView({ paciente, consulta }) {
 
-  {/* agendar */}
+  // Estados do agendamento, e editar
+  const [motivo, setMotivo] = useState('');
+  const [dataHora, setDataHora] = useState('');
 
-  const [motivo, setMotivo] = useState('')
-  const [dataHora, setDataHora] = useState('')
+  // Estados dos modais
+  const [agendarConsulta, setAgendarConsulta] = useState(false);
+  const [verProntuario, setVerProntuario] = useState(false);
+  const [editarConsultas, setEditarConsultas] = useState(false);
+  const [showConfirmacaoValores, setShowConfirmacaoValores] = useState(false);
 
-  const handleAgendar = async (e) => {
-    e.preventDefault()
+  // Fechar todos os modais
+  function fecharModal() {
+    setAgendarConsulta(false);
+    setVerProntuario(false);
+    setEditarConsultas(false);
+    setShowConfirmacaoValores(false);
+  }
 
-    const data = dataHora.toISOString().split('T')[0]
-    const hora = dataHora.toTimeString().slice(0, 5)
-    const consulta = { motivo, dataHora }
+  // agendar
+  const handleAgendar = async () => {
+    const data = dataHora.toISOString().split('T')[0];
+    const hora = dataHora.toTimeString().slice(0, 5);
 
     try {
       const response = await fetch('/api/consultas/agendar', {
@@ -27,103 +38,175 @@ export default function ClienteView({ paciente, consulta }) {
           hora,
           motivo
         }),
-      })
+      });
 
-      const json = await response.json()
+      const json = await response.json();
       if (response.ok) {
-        alert('Consulta agendada com sucesso!')
-        setMotivo('')
-        setDataHora('')
-        fecharModal()
+        alert('Consulta agendada com sucesso!');
+        setMotivo('');
+        setDataHora('');
+        fecharModal();
         window.location.reload();
       } else {
-        alert(json.error || 'Erro ao agendar')
+        alert(json.error || 'Erro ao agendar');
       }
     } catch (error) {
-      console.error('Erro ao agendar:', error)
-      alert('Erro de conexão com o servidor.')
+      console.error('Erro ao agendar:', error);
+      alert('Erro de conexão com o servidor.');
     }
+  };
+
+  // editar
+
+  const handleEditarConsulta = async () => {
+  if (!consulta?.id_consulta || !dataHora) return alert("Dados incompletos.");
+
+  const data = dataHora.toISOString().split("T")[0];
+  const hora = dataHora.toTimeString().slice(0, 5);
+
+  try {
+    const response = await fetch("/api/consultas/editar", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id_consulta: consulta.id_consulta, data, hora }),
+    });
+
+    const json = await response.json();
+
+    if (response.ok) {
+      alert("Consulta atualizada com sucesso!");
+      fecharModal();
+      window.location.reload();
+    } else {
+      alert(json.error || "Erro ao editar consulta.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Erro de conexão com o servidor.");
   }
+};
 
-  {/* modal */}
+// cancelar
 
-  const [agendarConsulta, setAgendarConsulta] = useState(false);
-  const [verProntuario, setVerProntuario] = useState(false);
-  const [editarConsultas, setEditarConsultas] = useState(false);
+const handleCancelarConsulta = async () => {
+  if (!consulta?.id_consulta) return alert("Consulta não encontrada.");
 
-  function fecharModal() {
-    setAgendarConsulta(false);
-    setVerProntuario(false);
-    setEditarConsultas(false);
+  if (!confirm("Tem certeza que deseja cancelar esta consulta?")) return;
+
+  try {
+    const response = await fetch("/api/consultas/cancelar", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id_consulta: consulta.id_consulta }),
+    });
+
+    const json = await response.json();
+
+    if (response.ok) {
+      alert("Consulta cancelada com sucesso!");
+      fecharModal();
+      window.location.reload();
+    } else {
+      alert(json.error || "Erro ao cancelar.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Erro de conexão com o servidor.");
   }
+};
 
   return (
     <div className={style.geral}>
       <div className={style.container}>
         <div className={style.cima}>
-            <div className={style.esquerda}>
+          <div className={style.esquerda}>
             <div className={style.ftdeperfil}></div>
-              <h2>{paciente.nome}</h2>
-              <p>{new Date(paciente.nascimento).toLocaleDateString()}</p> {/*fazer calculo e colocar idade*/}
-            </div>
-            <div className={style.direita}>
-              <h3>{consulta?.data ? `Proxima consulta: ${new Date(consulta.data).toLocaleDateString()} as ${consulta.hora?.substring(0, 5)}`: "Você não tem consultas marcadas no momento"} </h3>
-              <button className={style.botao} onClick={() => setEditarConsultas(true)}>Editar Consultas</button>
-            </div>  
+            <h2>{paciente.nome}</h2>
+            <p>{new Date(paciente.nascimento).toLocaleDateString()}</p> {/* cálculo de idade pode ser feito depois */}
+          </div>
+          <div className={style.direita}>
+            <h3>
+              {consulta?.data
+                ? `Próxima consulta: ${new Date(consulta.data).toLocaleDateString()} às ${consulta.hora?.substring(0, 5)}`
+                : "Você não tem consultas marcadas no momento"}
+            </h3>
+            <button className={style.botao} onClick={() => setEditarConsultas(true)}>Editar Consultas</button>
+          </div>
         </div>
 
-          <div className={style.baixo}>
-            <div className={style.esquerda}> 
-              <p>xx - Consultas Realizadas</p> {/* colocar consultas realizadas aqui */}
-              <button className={style.botao} onClick={() => setVerProntuario(true)}>Ver Prontuários</button>
-              <button className={style.botao} onClick={() => setAgendarConsulta(true)}>Nova Consulta</button>
-            </div>
-            <div className={`${style.direita} ${style.direitaBaixo}`}>
-              <h3>Observações</h3>
-              <p>alergico adfhefueufh</p>
-              <p>alergico adfhfgfdwsfh</p>
-            </div>
+        <div className={style.baixo}>
+          <div className={style.esquerda}>
+            <p>xx - Consultas Realizadas</p> {/* Consultas anteriores aqui */}
+            <button className={style.botao} onClick={() => setVerProntuario(true)}>Ver Prontuários</button>
+            <button className={style.botao} onClick={() => setAgendarConsulta(true)}>Nova Consulta</button>
+          </div>
+          <div className={`${style.direita} ${style.direitaBaixo}`}>
+            <h3>Observações</h3>
+            <p>alérgico a adfhefueufh</p>
+            <p>alérgico a adfhfgfdwsfh</p>
+          </div>
         </div>
       </div>
 
-      {/* modal, janelas de sobreposição */}
-
-       {agendarConsulta && (
+      {/* Modal: Agendar Consulta */}
+      {agendarConsulta && (
         <div className={style.modalOverlay} onClick={fecharModal}>
           <div className={style.modal} onClick={e => e.stopPropagation()}>
-            <h2>Agendar Consulta</h2>
-               
-              <form onSubmit={handleAgendar}>
-                <input className={style.input} type="text" title="Qual seu sintoma?" placeholder="Qual seu sintoma?" value={motivo} onChange={(e) => setMotivo(e.target.value)} required />
-                <Calendario className={style.input} selectedDate={dataHora} onDateChange={setDataHora} placeholder="Data e hora da consulta" mode="schedule" />
-                <button className={style.fechar} type="submit">Confirmar</button>
-              </form>
-
+            <h3>Agendar Consulta</h3>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              setShowConfirmacaoValores(true); 
+            }}>
+              <input className={style.input} type="text" title="Qual seu sintoma?" placeholder="Qual seu sintoma?" value={motivo} onChange={(e) => setMotivo(e.target.value)} required/>
+              <Calendario className={style.input} selectedDate={dataHora} onDateChange={setDataHora} placeholder="Data e hora da consulta" mode="schedule"/>
+              <button className={style.botaoModal} type="submit">Confirmar</button>
+            </form>
           </div>
         </div>
       )}
 
+      {/* Modal: Confirmação de valores */}
+      {showConfirmacaoValores && (
+        <div className={style.modalOverlay} onClick={() => setShowConfirmacaoValores(false)}>
+          <div className={style.modal} onClick={e => e.stopPropagation()}>
+            <h3>IMPORTANTE!</h3>
+            <p>O pagamento no valor de R$ 00,00 será feito presencialmente no dia da consulta. Ao finalizar, você concorda com essa condição.</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+              <button onClick={() => setShowConfirmacaoValores(false)} className={style.botaoModal}>Voltar</button>
+              <button onClick={handleAgendar} className={style.botaoModal}>Finalizar</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: Ver Prontuário */}
       {verProntuario && (
         <div className={style.modalOverlay} onClick={fecharModal}>
           <div className={style.modal} onClick={e => e.stopPropagation()}>
             <div className={style.containermodal}>
               <h2>Prontuários</h2>
-              <button onClick={fecharModal} className={style.fechar}>Fechar</button>
+              <button onClick={fecharModal} className={style.botaoModal}>Fechar</button>
             </div>
           </div>
         </div>
-  
       )}
 
+      {/* Modal: Editar Consultas */}
       {editarConsultas && (
         <div className={style.modalOverlay} onClick={fecharModal}>
           <div className={style.modal} onClick={e => e.stopPropagation()}>
-            <h2>Editar Consultas</h2>
-            <button onClick={fecharModal} className={style.fechar}>Fechar</button>
+            <h3>Editar Consulta</h3>
+            <form onSubmit={(e) => {e.preventDefault(); handleEditarConsulta();}}>
+              <Calendario className={style.input} selectedDate={dataHora} onDateChange={setDataHora} placeholder="Nova data e hora" mode="schedule" />
+              <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+                <button className={style.botaoModal} type="submit">Salvar Alterações</button>
+                <button onClick={handleCancelarConsulta} className={style.botaoModal}>Cancelar Consulta</button>
+                <button onClick={fecharModal} className={style.botaoModal}>Fechar</button>
+              </div>
+            </form>
           </div>
         </div>
       )}
-
     </div>
   );
 }
