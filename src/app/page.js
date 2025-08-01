@@ -1,26 +1,7 @@
-"use client"; // Indica que este é um componente do lado do cliente
-
-import { useState } from "react";
-import { Button, Box } from "@mui/material"; // Importando os componentes do MUI
 import style from "./page.module.css"; 
 import Carousel from '../components/carousel';
 
 export default function Home() {
-  // Estado para controlar a visibilidade das opções
-  const [showOptions, setShowOptions] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(""); // Estado para a seleção do cliente/cadastro
-
-  // Função para alternar a visibilidade das opções
-  const handleConsultClick = () => {
-    setShowOptions(!showOptions); // Alterna entre mostrar e esconder as opções
-  };
-
-  // Função para lidar com a seleção
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-    setShowOptions(false);  // Fecha o dropdown após a seleção
-  };
-
   return (
     <>
       <div className={style.paginaprincipal}>
@@ -29,51 +10,9 @@ export default function Home() {
           <h3>
             Todo mundo merece dentes saudáveis e um sorriso radiante sem gastar muito!
           </h3>
-          <Button variant="contained" onClick={handleConsultClick} sx={{
-                  padding: '10px 20px',
-                  width: '420px'
-          }}>
-            Consulte-se
-          </Button>
-
-          {/* Condicional para mostrar as opções ao clicar no botão */}
-          {showOptions && (
-            <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <Button
-                onClick={() => handleOptionSelect("Já sou cliente")}
-                variant="outlined"
-                sx={{
-                  padding: '10px',
-                  fontSize: '14px',
-                  backgroundColor: "#f0f0f0",
-                  borderRadius: '5px',
-                  boxShadow: 1,
-                  '&:hover': { backgroundColor: '#ddd' },
-                    width: '420px'
-                }}
-              >
-                Já sou cliente
-              </Button>
-              <Button
-                onClick={() => handleOptionSelect("Desejo me cadastrar")}
-                variant="outlined"
-                sx={{
-                  padding: '10px',
-                  fontSize: '14px',
-                  backgroundColor: "#f0f0f0",
-                  borderRadius: '5px',
-                  boxShadow: 1,
-                  '&:hover': { backgroundColor: '#ddd' },
-                  
-                }}
-              >
-                Desejo me cadastrar
-              </Button>
-            </Box>
-          )}
-
-          {/* Exibe a opção selecionada, se houver */}
-          {selectedOption && <h4>Você selecionou: {selectedOption}</h4>}
+          <a href="/cadastro">
+            <button className={style.botao}>Consulte-se</button>
+          </a>
         </div>
         <div className={style.gradienteCentro}></div>
         <img
