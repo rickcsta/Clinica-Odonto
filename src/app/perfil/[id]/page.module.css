@@ -68,11 +68,28 @@
   transform: scale(1);
 }
 
-.consultasRealizadas {
+.esquerda p {
   font-weight: 600;
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.direita h3 {
+  font-weight: 600;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.direita p {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .direitaBaixo {
@@ -124,6 +141,4 @@
   background-color: #d4af37;
 }
 
-.datahora {
-  margin-top: 20px;
-}
+
