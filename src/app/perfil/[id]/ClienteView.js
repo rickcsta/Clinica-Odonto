@@ -3,7 +3,7 @@ import { useState } from "react";
 import style from "./page.module.css";
 import Calendario from "../../../components/reactDatePicker";
 
-export default function ClienteView({ cliente }) {
+export default function ClienteView({ paciente }) {
   const [agendarConsulta, setAgendarConsulta] = useState(false);
   const [verProntuario, setVerProntuario] = useState(false);
   const [editarConsultas, setEditarConsultas] = useState(false);
@@ -20,8 +20,8 @@ export default function ClienteView({ cliente }) {
         <div className={style.cima}>
             <div className={style.esquerda}>
             <div className={style.ftdeperfil}></div>
-              <h2>{cliente.nome}</h2>
-              <p>{new Date(cliente.nascimento).toLocaleDateString()}</p> {/*fazer calculo e colocar idade*/}
+              <h2>{paciente.nome}</h2>
+              <p>{new Date(paciente.nascimento).toLocaleDateString()}</p> {/*fazer calculo e colocar idade*/}
             </div>
             <div className={style.direita}>
               <h1>Consulta Agendada - xx/xx/xx</h1> {/* colocar consultas aqui */}
@@ -30,9 +30,8 @@ export default function ClienteView({ cliente }) {
         </div>
 
           <div className={style.baixo}>
-            <div className={style.esquerda}>
-              <p>xx</p> {/* colocar consultas realizadas aqui */}
-              <p>Consultas Realizadas</p>
+            <div className={style.esquerda}> 
+              <p>xx - Consultas Realizadas</p> {/* colocar consultas realizadas aqui */}
               <button className={style.botao} onClick={() => setVerProntuario(true)}>Ver Prontuários</button>
               <button className={style.botao} onClick={() => setAgendarConsulta(true)}>Nova Consulta</button>
             </div>

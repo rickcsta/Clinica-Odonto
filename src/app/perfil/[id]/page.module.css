@@ -1,123 +1,120 @@
-/*tela em si*/
-.geral{
-    display: flex;
-    justify-content: center;
-    padding: 50px;
-    overflow: hidden;
+.geral {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f7f7f7;
+  padding: 20px;
 }
 
-.container{
-    display: flex;
-    flex-direction: column;
-    background-color: #878787;
-    padding: 50px;
-    border-radius: 30px;
-    width: 90%;
-    height: 800px;
-    box-shadow: 0 0 20px 0 #878787;
+.container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1200px;
+  min-height: 90vh;
+  padding: 60px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 
-.cima, .baixo {
+.cima,
+.baixo {
   display: flex;
   justify-content: space-between;
-  gap: 40px;
-  padding: 25px;
-  margin-top: 50px;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 50px;
 }
 
-.esquerda {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
+.esquerda,
 .direita {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  gap: 15px;
 }
 
 .ftdeperfil {
-  width: 160px;
-  height: 160px;
-  background-color: #000;
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
   border-radius: 50%;
   margin-bottom: 10px;
+  align-self: center;
 }
 
-.esquerda h2 {
-  font-size: 30px;
-  margin: 10px 0 5px;
+.botao {
+  padding: 15px;
+  background-color: #878787;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.esquerda p {
-  margin: 3px 0;
-  font-size: 0.95rem;
-  color: #000;
+.botao:hover {
+  background-color: #d4af37;
+  transform: scale(1.05);
 }
 
-/* Botões */
-.botao{
-    margin: 15px;
-    border-radius: 15px;
-    border: none;
-    padding: 20px;
-    cursor: pointer;
+.botao:active {
+  transform: scale(1);
 }
 
-.botao:hover{
-    background-color: #d4af37;
-    box-shadow: 0 0 20px 0 #d4af37;
-}
-
-.direita h1 {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.direita h3 {
-  font-weight: bold;
-  margin-bottom: 5%;
+.consultasRealizadas {
+  font-weight: 600;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .direitaBaixo {
-  margin-right: 6%;
+  margin-top: 25px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1;
+  align-self: flex-end;
+  min-width: 280px;
+  border: 2px solid #d4af37;
 }
-
-/*modal*/
 
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(4px);
-  background-color: rgba(0, 0, 0, 0.5); 
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999; 
+  z-index: 1000;
 }
 
 .modal {
-  background-color: white;
+  background-color: #fff;
   padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  max-width: 400px;
+  border-radius: 8px;
   width: 90%;
-  text-align: center;
+  max-width: 500px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
 .fechar {
   margin-top: 20px;
-  padding: 10px 20px;
+  padding: 10px;
   background-color: #878787;
-  color: white;
+  color: #fff;
+  font-weight: bold;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -125,8 +122,8 @@
 
 .fechar:hover {
   background-color: #d4af37;
-  box-shadow: 0 0 20px 0 #d4af37;
 }
 
-/*calendario*/
-
+.datahora {
+  margin-top: 20px;
+}

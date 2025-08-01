@@ -24,8 +24,8 @@ export default function ClienteForm() {
 
       if (response.ok) {
         const data = await response.json()
-        const id_cliente = data.id_cliente
-        router.push(`/perfil/${id_cliente}`)
+        const id_paciente = data.id_paciente
+        router.push(`/perfil/${id_paciente}`)
       } else {
         const errorData = await response.json()
         alert(`Erro ao fazer login: ${errorData.error}`)
@@ -42,7 +42,7 @@ export default function ClienteForm() {
         <div className={style.containerlog}>
           <h1 className={style.titulo}>Login</h1>
           <form className={style.entradas} onSubmit={handleLogin}>
-            <input className={style.input} type="text" placeholder="CPF" value={cpflog} onChange={(e) => setCpflog(e.target.value)} required />
+            <input className={style.input} type="number" title="CPF" placeholder="CPF" value={cpflog} onChange={(e) => {const value = e.target.value; if (value.length <= 11) { setCpflog(value); }}} required/>
             <input className={style.input} type="password" placeholder="Senha" value={senhalog} onChange={(e) => setSenhalog(e.target.value)} required />
             <Link href="#"><p className={style.link}>Esqueceu sua senha?</p></Link>
             <button className={style.botao} type="submit">Entrar</button>

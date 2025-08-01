@@ -18,19 +18,19 @@ export default function ClienteForm() {
   const handleCadastro = async (e) => {
     e.preventDefault()
 
-    const cliente = { nome, cpfcad, nascimento, endereco, contato, senhacad }
+    const paciente = { nome, cpfcad, nascimento, endereco, contato, senhacad }
 
     try {
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cliente)
+        body: JSON.stringify(paciente)
       })
 
       if (response.ok) {
         const data = await response.json()
-        const id_cliente = data.id_cliente
-        router.push(`/perfil/${id_cliente}`)
+        const id_paciente = data.id_paciente
+        router.push(`/perfil/${id_paciente}`)
       } else {
         const errorData = await response.json()
         alert(`Erro ao cadastrar cliente: ${errorData.error}`)
