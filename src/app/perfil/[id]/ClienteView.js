@@ -3,7 +3,7 @@ import { useState } from "react";
 import style from "./page.module.css";
 import Calendario from "../../../components/reactDatePicker";
 
-export default function ClienteView({ paciente, consulta }) {
+export default function ClienteView({ paciente, consulta, historico }) {
 
   // Estados do agendamento, e editar
   const [motivo, setMotivo] = useState('');
@@ -57,7 +57,6 @@ export default function ClienteView({ paciente, consulta }) {
   };
 
   // editar
-
   const handleEditarConsulta = async () => {
   if (!consulta?.id_consulta || !dataHora) return alert("Dados incompletos.");
 
@@ -87,30 +86,24 @@ export default function ClienteView({ paciente, consulta }) {
 };
 
 // cancelar
-
 const handleCancelarConsulta = async () => {
-  if (!consulta?.id_consulta) return alert("Consulta não encontrada.");
-
-  if (!confirm("Tem certeza que deseja cancelar esta consulta?")) return;
-
   try {
-    const response = await fetch("/api/consultas/cancelar", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+    const response = await fetch('/api/consultas/cancelar', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id_consulta: consulta.id_consulta }),
     });
 
     const json = await response.json();
-
     if (response.ok) {
       alert("Consulta cancelada com sucesso!");
       fecharModal();
       window.location.reload();
     } else {
-      alert(json.error || "Erro ao cancelar.");
+      alert(json.error || "Erro ao cancelar consulta.");
     }
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error("Erro ao cancelar:", error);
     alert("Erro de conexão com o servidor.");
   }
 };
@@ -136,7 +129,7 @@ const handleCancelarConsulta = async () => {
 
         <div className={style.baixo}>
           <div className={style.esquerda}>
-            <p>xx - Consultas Realizadas</p> {/* Consultas anteriores aqui */}
+           <p>Historico de consultas - {Number(historico.total) || 0} </p>
             <button className={style.botao} onClick={() => setVerProntuario(true)}>Ver Prontuários</button>
             <button className={style.botao} onClick={() => setAgendarConsulta(true)}>Nova Consulta</button>
           </div>

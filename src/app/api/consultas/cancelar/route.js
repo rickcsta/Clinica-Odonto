@@ -1,10 +1,10 @@
 import pool from '../../../../lib/db'
 
-export async function DELETE(req) {
+export async function PUT(req) {
   try {
     const { id_consulta } = await req.json();
 
-    await pool.query('DELETE FROM consulta WHERE id_consulta = $1', [id_consulta]);
+    await pool.query('UPDATE consulta SET status = $1 WHERE id_consulta = $2', ['cancelada', id_consulta]);
 
     return new Response(JSON.stringify({ message: 'Consulta cancelada!' }), { status: 200 });
   } catch (error) {
