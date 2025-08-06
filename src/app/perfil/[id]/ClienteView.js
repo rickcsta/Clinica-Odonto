@@ -150,7 +150,7 @@ const handleCancelarConsulta = async () => {
               e.preventDefault();
               setShowConfirmacaoValores(true); 
             }}>
-              <input className={style.input} type="text" title="Qual seu sintoma?" placeholder="Qual seu sintoma?" value={motivo} onChange={(e) => setMotivo(e.target.value)} required/>
+              <input className={style.input} type="text" title="Qual procedimento deseja realizar?" placeholder="Qual seu sintoma?" value={motivo} onChange={(e) => setMotivo(e.target.value)} required/>
               <Calendario className={style.input} selectedDate={dataHora} onDateChange={setDataHora} placeholder="Data e hora da consulta" mode="schedule"/>
               <button className={style.botaoModal} type="submit">Confirmar</button>
             </form>
