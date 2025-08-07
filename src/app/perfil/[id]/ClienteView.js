@@ -118,25 +118,24 @@ const handleCancelarConsulta = async () => {
             <p>{new Date(paciente.nascimento).toLocaleDateString()}</p> {/* cálculo de idade pode ser feito depois */}
           </div>
           <div className={style.direita}>
-            <h3>
-              {consulta?.data
-                ? `Próxima consulta: ${new Date(consulta.data).toLocaleDateString()} às ${consulta.hora?.substring(0, 5)}`
-                : "Você não tem consultas marcadas no momento"}
-            </h3>
-            <button className={style.botao} onClick={() => setEditarConsultas(true)}>Editar Consultas</button>
+            <button className={style.botao} onClick={() => setVerProntuario(true)}>Ver prontuário</button>
           </div>
         </div>
 
         <div className={style.baixo}>
           <div className={style.esquerda}>
            <p>Historico de consultas - {Number(historico.total) || 0} </p>
-            <button className={style.botao} onClick={() => setVerProntuario(true)}>Ver Prontuários</button>
-            <button className={style.botao} onClick={() => setAgendarConsulta(true)}>Nova Consulta</button>
+            <button className={style.botao} onClick={() => setAgendarConsulta(true)}>Nova consulta</button>
+            <button className={style.botao} onClick={() => setEditarConsultas(true)}>Editar consulta</button>
           </div>
           <div className={`${style.direita} ${style.direitaBaixo}`}>
             <h3>Observações</h3>
-            <p>alérgico a adfhefueufh</p>
-            <p>alérgico a adfhfgfdwsfh</p>
+            <p>
+              {consulta?.data
+                ? `Próxima consulta: ${new Date(consulta.data).toLocaleDateString()} às ${consulta.hora?.substring(0, 5)}`
+                : "Você não possui consultas marcadas no momento"}
+            </p>
+            <p>Você não possui tratamento ativo no momento</p>
           </div>
         </div>
       </div>
@@ -150,7 +149,7 @@ const handleCancelarConsulta = async () => {
               e.preventDefault();
               setShowConfirmacaoValores(true); 
             }}>
-              <input className={style.input} type="text" title="Qual procedimento deseja realizar?" placeholder="Qual seu sintoma?" value={motivo} onChange={(e) => setMotivo(e.target.value)} required/>
+              <input className={style.input} type="text" title="Qual procedimento deseja realizar?" placeholder="Qual procedimento deseja realizar?" value={motivo} onChange={(e) => setMotivo(e.target.value)} required/>
               <Calendario className={style.input} selectedDate={dataHora} onDateChange={setDataHora} placeholder="Data e hora da consulta" mode="schedule"/>
               <button className={style.botaoModal} type="submit">Confirmar</button>
             </form>
