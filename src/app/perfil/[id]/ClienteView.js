@@ -1,19 +1,36 @@
 'use client'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "./page.module.css";
 import Calendario from "../../../components/reactDatePicker";
 
 export default function ClienteView({ paciente, consulta, historico }) {
 
-  // Estados do agendamento, e editar
+  // Estados do agendamento, editar, selecionar procedimento
   const [motivo, setMotivo] = useState('');
   const [dataHora, setDataHora] = useState('');
+  const [procedimento, setProcedimento] = useState([])
+  const [procedimentoSelecionado, setProcedimentoSelecionado] = useState('');
+  const handleChangeProcedimento = (e) => {
+    setProcedimentoSelecionado(e.target.value);
+  };
 
   // Estados dos modais
   const [agendarConsulta, setAgendarConsulta] = useState(false);
   const [verProntuario, setVerProntuario] = useState(false);
   const [editarConsultas, setEditarConsultas] = useState(false);
   const [showConfirmacaoValores, setShowConfirmacaoValores] = useState(false);
+  
+
+//Retornar os procedimento para escolher
+useEffect(() => {
+    fetchProcedimento()
+  }, []);
+
+  const fetchProcedimento = async () => {
+    const response = await fetch('/api/procedimento');
+    const proc = await response.json();
+    setProcedimento(proc);
+  };
 
   // Fechar todos os modais
   function fecharModal() {
@@ -36,7 +53,6 @@ export default function ClienteView({ paciente, consulta, historico }) {
           id_paciente: paciente.id_paciente,
           data,
           hora,
-          motivo
         }),
       });
 
@@ -115,7 +131,7 @@ const handleCancelarConsulta = async () => {
           <div className={style.esquerda}>
             <div className={style.ftdeperfil}></div>
             <h2>{paciente.nome}</h2>
-            <p>{new Date(paciente.nascimento).toLocaleDateString()}</p> {/* cálculo de idade pode ser feito depois */}
+            <p>{new Date(paciente.data_nascimento).toLocaleDateString()}</p> {/* cálculo de idade pode ser feito depois */}
           </div>
           <div className={style.direita}>
             <button className={style.botao} onClick={() => setVerProntuario(true)}>Ver prontuário</button>
@@ -135,7 +151,6 @@ const handleCancelarConsulta = async () => {
                 ? `Próxima consulta: ${new Date(consulta.data).toLocaleDateString()} às ${consulta.hora?.substring(0, 5)}`
                 : "Você não possui consultas marcadas no momento"}
             </p>
-            <p>Você não possui tratamento ativo no momento</p>
           </div>
         </div>
       </div>
@@ -149,7 +164,23 @@ const handleCancelarConsulta = async () => {
               e.preventDefault();
               setShowConfirmacaoValores(true); 
             }}>
-              <input className={style.input} type="text" title="Qual procedimento deseja realizar?" placeholder="Qual procedimento deseja realizar?" value={motivo} onChange={(e) => setMotivo(e.target.value)} required/>
+              <select 
+                  value={procedimentoSelecionado} 
+                  onChange={handleChangeProcedimento} 
+                  required 
+                  className={style.input}
+                >
+                  <option value="">Selecione um procedimento</option>
+                  {procedimento.length > 0 ? (
+                    procedimento.map((proc) => (
+                      <option key={proc.id_procedimento} value={proc.id_procedimento}>
+                        {proc.nome}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="">Carregando procedimentos...</option>
+                  )}
+                </select>
               <Calendario className={style.input} selectedDate={dataHora} onDateChange={setDataHora} placeholder="Data e hora da consulta" mode="schedule"/>
               <button className={style.botaoModal} type="submit">Confirmar</button>
             </form>

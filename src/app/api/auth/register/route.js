@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
-import pool from "../../../../lib/db"
+import pool from "@/lib/db"
 
 export async function POST(request) {
   try {
     const { nome, cpfcad, nascimento, endereco, contato, senhacad } = await request.json()
     const pacient = await pool.connect()
     const result = await pacient.query(
-      'INSERT INTO paciente (nome, cpf, nascimento, endereco, contato, senha) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      'INSERT INTO paciente (nome, cpf, data_nascimento, endereco, telefone, senha) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
       [nome, cpfcad, nascimento, endereco, contato, senhacad]
     )
 
