@@ -6,13 +6,12 @@ import Calendario from "../../../components/reactDatePicker";
 export default function ClienteView({ paciente, consulta, historico }) {
 
   // Estados do agendamento, editar, selecionar procedimento
-  const [motivo, setMotivo] = useState('');
+  const [dentista, setDentista] = useState([]);
+  const [dentistaSelecionado, setDentistaSelecionado] = useState('')
   const [dataHora, setDataHora] = useState('');
   const [procedimento, setProcedimento] = useState([])
   const [procedimentoSelecionado, setProcedimentoSelecionado] = useState('');
-  const handleChangeProcedimento = (e) => {
-    setProcedimentoSelecionado(e.target.value);
-  };
+
 
   // Estados dos modais
   const [agendarConsulta, setAgendarConsulta] = useState(false);
@@ -22,6 +21,10 @@ export default function ClienteView({ paciente, consulta, historico }) {
   
 
 //Retornar os procedimento para escolher
+const handleChangeProcedimento = (e) => {
+    setProcedimentoSelecionado(e.target.value);
+  };
+
 useEffect(() => {
     fetchProcedimento()
   }, []);
@@ -30,6 +33,21 @@ useEffect(() => {
     const response = await fetch('/api/procedimento');
     const proc = await response.json();
     setProcedimento(proc);
+  };
+
+  //Retornar dentistas para escolher
+  const handleChangeDentista = (e) => {
+    setDentistaSelecionado(e.target.value);
+  };
+
+  useEffect(() => {
+    fetchDentista()
+  }, []);
+
+  const fetchDentista = async () => {
+    const response = await fetch('/api/dentista');
+    const den = await response.json();
+    setDentista(den);
   };
 
   // Fechar todos os modais
@@ -51,15 +69,16 @@ useEffect(() => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           id_paciente: paciente.id_paciente,
+          id_dentista: dentistaSelecionado,
           data,
           hora,
+          procedimento: procedimentoSelecionado,
         }),
       });
 
       const json = await response.json();
       if (response.ok) {
         alert('Consulta agendada com sucesso!');
-        setMotivo('');
         setDataHora('');
         fecharModal();
         window.location.reload();
@@ -164,6 +183,9 @@ const handleCancelarConsulta = async () => {
               e.preventDefault();
               setShowConfirmacaoValores(true); 
             }}>
+
+              {/*select da tabela procedimento*/}
+
               <select 
                   value={procedimentoSelecionado} 
                   onChange={handleChangeProcedimento} 
@@ -181,6 +203,27 @@ const handleCancelarConsulta = async () => {
                     <option value="">Carregando procedimentos...</option>
                   )}
                 </select>
+
+                {/*select da tabela dentista*/}
+
+                <select 
+                  value={dentistaSelecionado} 
+                  onChange={handleChangeDentista} 
+                  required 
+                  className={style.input}
+                >
+                  <option value="">Selecione um dentista</option>
+                  {dentista.length > 0 ? (
+                    dentista.map((den) => (
+                      <option key={den.id_dentista} value={den.id_dentista}>
+                        {den.nome}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="">Carregando dentistas...</option>
+                  )}
+                </select>
+
               <Calendario className={style.input} selectedDate={dataHora} onDateChange={setDataHora} placeholder="Data e hora da consulta" mode="schedule"/>
               <button className={style.botaoModal} type="submit">Confirmar</button>
             </form>
