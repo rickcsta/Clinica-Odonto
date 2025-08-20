@@ -4,7 +4,7 @@ import pool from "@/lib/db";
 export async function GET(Response) {
   try {
     const pacient = await pool.connect();
-    const result = await pacient.query("SELECT * FROM paciente");
+    const result = await pacient.query("SELECT nome, EXTRACT(YEAR FROM AGE(data_nascimento)) AS idade from paciente");
 
     pacient.release();
 
