@@ -24,15 +24,15 @@ export async function POST(req) {
     }
 
     // 2. Valida consultas duplicadas
-    const consultaExistente = await pool.query(
-      `SELECT * FROM consulta 
-       WHERE id_paciente = $1 AND data = $2 AND status = 'Agendada'`,
-      [id_paciente, data]
-    );
+   const consultaExistente = await pool.query(
+  `SELECT * FROM consulta 
+   WHERE id_paciente = $1 AND data >= CURRENT_DATE AND status = 'Agendada'`,
+  [id_paciente]
+);
 
     if (consultaExistente.rows.length > 0) {
       return new Response(
-        JSON.stringify({ error: "Paciente já possui uma consulta agendada para esta data." }),
+        JSON.stringify({ error: "Paciente já possui uma consulta agendada." }),
         { status: 400 }
       );
     }

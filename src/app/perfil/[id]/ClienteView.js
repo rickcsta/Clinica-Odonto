@@ -2,8 +2,11 @@
 import { useState, useEffect } from "react";
 import style from "./page.module.css";
 import Calendario from "../../../components/reactDatePicker";
+import { useRouter } from 'next/navigation';
 
-export default function ClienteView({ paciente, consulta, historico }) {
+export default function ClienteView({ paciente, consulta }) {
+
+  const router = useRouter()
 
   // Estados do agendamento, editar, selecionar procedimento
   const [dentista, setDentista] = useState([]);
@@ -15,7 +18,6 @@ export default function ClienteView({ paciente, consulta, historico }) {
 
   // Estados dos modais
   const [agendarConsulta, setAgendarConsulta] = useState(false);
-  const [verProntuario, setVerProntuario] = useState(false);
   const [editarConsultas, setEditarConsultas] = useState(false);
   const [showConfirmacaoValores, setShowConfirmacaoValores] = useState(false);
   
@@ -53,7 +55,6 @@ useEffect(() => {
   // Fechar todos os modais
   function fecharModal() {
     setAgendarConsulta(false);
-    setVerProntuario(false);
     setEditarConsultas(false);
     setShowConfirmacaoValores(false);
   }
@@ -95,19 +96,21 @@ useEffect(() => {
 
   // editar
   const handleEditarConsulta = async () => {
-  
-  const data = dataHora.toISOString().split("T")[0];
-  const hora = dataHora.toTimeString().slice(0, 5);
+  const data = dataHora?.toISOString().split("T")[0];
+  const hora = dataHora?.toTimeString().slice(0, 5);
+
+  const body = { id_consulta: consulta.id_consulta, data, hora };
+  if (dentistaSelecionado) body.id_dentista = dentistaSelecionado;
+  if (procedimentoSelecionado) body.procedimento = procedimentoSelecionado;
 
   try {
     const response = await fetch("/api/consultas/editar", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id_consulta: consulta.id_consulta, id_dentista: dentistaSelecionado, data, hora, procedimento: procedimentoSelecionado  }),
+      body: JSON.stringify(body),
     });
 
     const json = await response.json();
-
     if (response.ok) {
       alert("Consulta atualizada com sucesso!");
       fecharModal();
@@ -154,7 +157,7 @@ const handleCancelarConsulta = async () => {
             <p>{new Date(paciente.data_nascimento).toLocaleDateString()}</p> {/* cálculo de idade pode ser feito depois */}
           </div>
           <div className={style.direita}>
-            <button className={style.botao} onClick={() => setVerProntuario(true)}>Ver prontuário</button>
+           <button className={style.botao} onClick={() => router.push(`/prontuario/${paciente.id_paciente}`)}> Ver prontuário</button> 
           </div>
         </div>
 
@@ -245,18 +248,6 @@ const handleCancelarConsulta = async () => {
         </div>
       )}
 
-      {/* Modal: Ver Prontuário */}
-      {verProntuario && (
-        <div className={style.modalOverlay} onClick={fecharModal}>
-          <div className={style.modal} onClick={e => e.stopPropagation()}>
-            <div className={style.containermodal}>
-              <h2>Prontuários</h2>
-              <button onClick={fecharModal} className={style.botaoModal}>Fechar</button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Modal: Editar Consultas */}
       {editarConsultas && (
         <div className={style.modalOverlay} onClick={fecharModal}>
@@ -266,8 +257,7 @@ const handleCancelarConsulta = async () => {
 
               <select 
                   value={procedimentoSelecionado} 
-                  onChange={handleChangeProcedimento} 
-                  required 
+                  onChange={handleChangeProcedimento}  
                   className={style.input}
                 >
                   <option value="">Alterar procedimento</option>
@@ -284,8 +274,7 @@ const handleCancelarConsulta = async () => {
 
                 <select 
                   value={dentistaSelecionado} 
-                  onChange={handleChangeDentista} 
-                  required 
+                  onChange={handleChangeDentista}  
                   className={style.input}
                 >
                   <option value="">Alterar dentista</option>

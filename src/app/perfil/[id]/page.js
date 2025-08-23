@@ -8,8 +8,5 @@ export default async function PerfilPage({ params }) {
   const consulta = await db.query("SELECT * FROM consulta WHERE id_paciente = $1 AND status != 'Cancelada' ORDER BY data ASC LIMIT 1", [params.id] );
   const infoConsulta = consulta.rows[0];
 
-  const historico = await db.query("SELECT COUNT(*) AS total FROM consulta WHERE id_paciente = $1 AND status IN ('Realizada', 'Cancelada')", [params.id] );
-  const infoHistorico = historico.rows[0];
-
-  return <ClienteView paciente={dadosPaciente} consulta={infoConsulta} historico={infoHistorico} />;
+  return <ClienteView paciente={dadosPaciente} consulta={infoConsulta} />;
 }

@@ -1,5 +1,6 @@
 import style from "./page.module.css"; 
 import Carousel from '../components/carousel';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -10,9 +11,9 @@ export default function Home() {
           <h3>
             Todo mundo merece dentes saudáveis e um sorriso radiante sem gastar muito!
           </h3>
-          <a href="/cadastro">
+          <Link href="/cadastro">
             <button className={style.botao}>Consulte-se</button>
-          </a>
+          </Link>
         </div>
         <div className={style.gradienteCentro}></div>
         <img
