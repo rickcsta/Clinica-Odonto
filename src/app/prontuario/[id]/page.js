@@ -8,5 +8,5 @@ export default async function ProntuarioPage({ params }) {
    const consulta = await db.query("SELECT * FROM consulta WHERE id_paciente = $1 ORDER BY data DESC, hora DESC", [params.id]);
    const dadosConsulta = consulta.rows;
 
-  return <ClienteView paciente={dadosPaciente} consulta={dadosConsulta} />;
+  return <ClienteView paciente={dadosPaciente} consulta={dadosConsulta}/>;
 }

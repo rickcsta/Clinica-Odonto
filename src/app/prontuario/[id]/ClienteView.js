@@ -1,12 +1,13 @@
 import style from "./page.module.css";
 
-export default function ClienteView({ paciente, consulta }) {
+export default function ClienteView({ consulta }) {
   return (
     <>
     <div className={style.geral}>
         <div className={style.container}>
            <div className={style.tabelaConsulta}>
                 <h2>Histórico de Consultas</h2>
+                  <div className={style.tabelaContainer}>
                         <table className={style.tabela}>
                             <thead>
                             <tr>
@@ -27,6 +28,7 @@ export default function ClienteView({ paciente, consulta }) {
                                 ))}
                             </tbody>
                         </table>
+                  </div>
             </div>
 
             <div className={style.odontograma}>
