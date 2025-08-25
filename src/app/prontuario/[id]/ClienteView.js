@@ -4,8 +4,9 @@ export default function ClienteView({ paciente, consulta }) {
   return (
     <>
     <div className={style.geral}>
-           <div>
-                <h2>Historico de Consultas</h2>
+        <div className={style.container}>
+           <div className={style.tabelaConsulta}>
+                <h2>Histórico de Consultas</h2>
                         <table className={style.tabela}>
                             <thead>
                             <tr>
@@ -21,11 +22,23 @@ export default function ClienteView({ paciente, consulta }) {
                                     <td>{new Date(item.data).toLocaleDateString()} às {item.hora ?? '---'}</td>
                                     <td>{item.procedimento}</td>
                                     <td>{item.status}</td>
+                                    <td>Mais info</td>
                                 </tr>
                                 ))}
                             </tbody>
                         </table>
             </div>
+
+            <div className={style.odontograma}>
+            </div>
+
+            <div className={style.baixo}>
+              <div className={style.orientacoes}>
+              </div>
+              <div className={style.examesimagens}>
+            </div>  
+            </div>   
+        </div>             
     </div>
     </>
   )
