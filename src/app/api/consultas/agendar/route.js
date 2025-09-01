@@ -2,7 +2,7 @@ import pool from '@/lib/db'
 
 export async function POST(req) {
   try {
-    const { id_paciente, id_dentista, data, hora, procedimento } = await req.json();
+    const { id_paciente, data, hora, procedimento } = await req.json();
 
     // 1. Verifica se já existe prontuário
     let prontuarioId = null; 
@@ -37,26 +37,14 @@ export async function POST(req) {
       );
     }
 
-    // 3. Verifica disponibilidade do dentista
-    const dentistaOcupado = await pool.query(
-      `SELECT * FROM consulta 
-       WHERE id_dentista = $1 AND data = $2 AND hora = $3 AND status = 'Agendada'`,
-      [id_dentista, data, hora]
-    );
-
-    if (dentistaOcupado.rows.length > 0) {
-      return new Response(
-        JSON.stringify({ error: "Dentista já possui consulta agendada neste horário." }),
-        { status: 400 }
-      );
-    }
+  
 
     // 4. Insere a consulta
     const result = await pool.query(
-      `INSERT INTO consulta (id_paciente, id_dentista, id_prontuario, data, hora, status)
-       VALUES ($1, $2, $3, $4, $5, 'Agendada')
+      `INSERT INTO consulta (id_paciente, id_prontuario, data, hora, status)
+       VALUES ($1, $2, $3, $4, 'Agendada')
        RETURNING id_consulta`,
-      [id_paciente, id_dentista, prontuarioId, data, hora]
+      [id_paciente, prontuarioId, data, hora]
     );
 
     const id_consulta = result.rows[0].id_consulta;

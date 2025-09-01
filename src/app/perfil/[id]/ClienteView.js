@@ -9,8 +9,6 @@ export default function ClienteView({ paciente, consulta }) {
   const router = useRouter()
 
   // Estados do agendamento, editar, selecionar procedimento
-  const [dentista, setDentista] = useState([]);
-  const [dentistaSelecionado, setDentistaSelecionado] = useState('')
   const [dataHora, setDataHora] = useState('');
   const [procedimento, setProcedimento] = useState([])
   const [procedimentoSelecionado, setProcedimentoSelecionado] = useState('');
@@ -37,21 +35,6 @@ useEffect(() => {
     setProcedimento(proc);
   };
 
-  //Retornar dentistas para escolher
-  const handleChangeDentista = (e) => {
-    setDentistaSelecionado(e.target.value);
-  };
-
-  useEffect(() => {
-    fetchDentista()
-  }, []);
-
-  const fetchDentista = async () => {
-    const response = await fetch('/api/dentista');
-    const den = await response.json();
-    setDentista(den);
-  };
-
   // Fechar todos os modais
   function fecharModal() {
     setAgendarConsulta(false);
@@ -70,7 +53,6 @@ useEffect(() => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         id_paciente: paciente.id_paciente,
-        id_dentista: dentistaSelecionado,
         data,
         hora,
         procedimento: procedimentoSelecionado,
@@ -81,7 +63,6 @@ useEffect(() => {
     if (response.ok) {
       alert('Consulta agendada com sucesso!');
       setDataHora('');
-      setDentistaSelecionado('');
       setProcedimentoSelecionado('');
       fecharModal();
       window.location.reload();
@@ -100,7 +81,6 @@ useEffect(() => {
   const hora = dataHora?.toTimeString().slice(0, 5);
 
   const body = { id_consulta: consulta.id_consulta, data, hora };
-  if (dentistaSelecionado) body.id_dentista = dentistaSelecionado;
   if (procedimentoSelecionado) body.procedimento = procedimentoSelecionado;
 
   try {
@@ -207,26 +187,6 @@ const handleCancelarConsulta = async () => {
                   )}
                 </select>
 
-                {/*select da tabela dentista*/}
-
-                <select 
-                  value={dentistaSelecionado} 
-                  onChange={handleChangeDentista} 
-                  required 
-                  className={style.input}
-                >
-                  <option value="">Selecione um dentista</option>
-                  {dentista.length > 0 ? (
-                    dentista.map((den) => (
-                      <option key={den.id_dentista} value={den.id_dentista}>
-                        {den.nome}
-                      </option>
-                    ))
-                  ) : (
-                    <option value="">Carregando dentistas...</option>
-                  )}
-                </select>
-
               <Calendario className={style.input} selectedDate={dataHora} onDateChange={setDataHora} placeholder="Data e hora da consulta" mode="schedule"/>
               <button className={style.botaoModal} type="submit">Confirmar</button>
             </form>
@@ -269,23 +229,6 @@ const handleCancelarConsulta = async () => {
                     ))
                   ) : (
                     <option value="">Carregando procedimentos...</option>
-                  )}
-                </select>
-
-                <select 
-                  value={dentistaSelecionado} 
-                  onChange={handleChangeDentista}  
-                  className={style.input}
-                >
-                  <option value="">Alterar dentista</option>
-                  {dentista.length > 0 ? (
-                    dentista.map((den) => (
-                      <option key={den.id_dentista} value={den.id_dentista}>
-                        {den.nome}
-                      </option>
-                    ))
-                  ) : (
-                    <option value="">Carregando dentistas...</option>
                   )}
                 </select>
 
