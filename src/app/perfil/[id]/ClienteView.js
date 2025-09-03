@@ -10,22 +10,20 @@ export default function ClienteView({ paciente, consulta }) {
 
   // Estados do agendamento, editar, selecionar procedimento
   const [dataHora, setDataHora] = useState('');
-  const [procedimento, setProcedimento] = useState([])
+  const [procedimento, setProcedimento] = useState([]);
   const [procedimentoSelecionado, setProcedimentoSelecionado] = useState('');
-
 
   // Estados dos modais
   const [agendarConsulta, setAgendarConsulta] = useState(false);
   const [editarConsultas, setEditarConsultas] = useState(false);
   const [showConfirmacaoValores, setShowConfirmacaoValores] = useState(false);
-  
 
-//Retornar os procedimento para escolher
-const handleChangeProcedimento = (e) => {
+  // Retornar os procedimento para escolher
+  const handleChangeProcedimento = (e) => {
     setProcedimentoSelecionado(e.target.value);
   };
 
-useEffect(() => {
+  useEffect(() => {
     fetchProcedimento()
   }, []);
 
@@ -42,90 +40,90 @@ useEffect(() => {
     setShowConfirmacaoValores(false);
   }
 
-  // agendar
+  // Agendar
   const handleAgendar = async () => {
     const data = dataHora.toISOString().split('T')[0];
     const hora = dataHora.toTimeString().slice(0, 5);
 
- try {
-    const response = await fetch('/api/consultas/agendar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id_paciente: paciente.id_paciente,
-        data,
-        hora,
-        procedimento: procedimentoSelecionado,
-      }),
-    });
+    try {
+      const response = await fetch('/api/consultas/agendar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id_paciente: paciente.id_paciente,
+          data,
+          hora,
+          procedimento: procedimentoSelecionado,
+        }),
+      });
 
-    const json = await response.json();
-    if (response.ok) {
-      alert('Consulta agendada com sucesso!');
-      setDataHora('');
-      setProcedimentoSelecionado('');
-      fecharModal();
-      window.location.reload();
-    } else {
-      alert(json.error || 'Erro ao agendar');
+      const json = await response.json();
+      if (response.ok) {
+        alert('Consulta agendada com sucesso!');
+        setDataHora('');
+        setProcedimentoSelecionado('');
+        fecharModal();
+        window.location.reload();
+      } else {
+        alert(json.error || 'Erro ao agendar');
+      }
+    } catch (error) {
+      console.error('Erro ao agendar:', error);
+      alert('Erro de conexão com o servidor.');
     }
-  } catch (error) {
-    console.error('Erro ao agendar:', error);
-    alert('Erro de conexão com o servidor.');
-  }
-};
+  };
 
-  // editar
+  // Editar
   const handleEditarConsulta = async () => {
-  const data = dataHora?.toISOString().split("T")[0];
-  const hora = dataHora?.toTimeString().slice(0, 5);
+    const data = dataHora?.toISOString().split("T")[0];
+    const hora = dataHora?.toTimeString().slice(0, 5);
 
-  const body = { id_consulta: consulta.id_consulta, data, hora };
-  if (procedimentoSelecionado) body.procedimento = procedimentoSelecionado;
+    const body = { id_consulta: consulta.id_consulta, data, hora };
+    if (procedimentoSelecionado) body.procedimento = procedimentoSelecionado;
 
-  try {
-    const response = await fetch("/api/consultas/editar", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    try {
+      const response = await fetch("/api/consultas/editar", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
-    const json = await response.json();
-    if (response.ok) {
-      alert("Consulta atualizada com sucesso!");
-      fecharModal();
-      window.location.reload();
-    } else {
-      alert(json.error || "Erro ao editar consulta.");
+      const json = await response.json();
+      if (response.ok) {
+        alert("Consulta atualizada com sucesso!");
+        fecharModal();
+        window.location.reload();
+      } else {
+        alert(json.error || "Erro ao editar consulta.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Erro de conexão com o servidor.");
     }
-  } catch (err) {
-    console.error(err);
-    alert("Erro de conexão com o servidor.");
-  }
-};
+  };
 
-// cancelar
-const handleCancelarConsulta = async () => {
-  try {
-    const response = await fetch('/api/consultas/cancelar', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id_consulta: consulta.id_consulta }),
-    });
+  // Cancelar
+  const handleCancelarConsulta = async () => {
+    try {
+      const response = await fetch('/api/consultas/cancelar', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_consulta: consulta.id_consulta }),
+      });
 
-    const json = await response.json();
-    if (response.ok) {
-      alert("Consulta cancelada com sucesso!");
-      fecharModal();
-      window.location.reload();
-    } else {
-      alert(json.error || "Erro ao cancelar consulta.");
+      const json = await response.json();
+      if (response.ok) {
+        alert("Consulta cancelada com sucesso!");
+        fecharModal();
+        window.location.reload();
+      } else {
+        alert(json.error || "Erro ao cancelar consulta.");
+      }
+    } catch (error) {
+      console.error("Erro ao cancelar:", error);
+      alert("Erro de conexão com o servidor.");
     }
-  } catch (error) {
-    console.error("Erro ao cancelar:", error);
-    alert("Erro de conexão com o servidor.");
-  }
-};
+  };
 
   return (
     <div className={style.geral}>
@@ -134,17 +132,16 @@ const handleCancelarConsulta = async () => {
           <div className={style.esquerda}>
             <div className={style.ftdeperfil}></div>
             <h2>{paciente.nome}</h2>
-            <p>{new Date(paciente.data_nascimento).toLocaleDateString()}</p> {/* cálculo de idade pode ser feito depois */}
+            <p>{new Date(paciente.data_nascimento).toLocaleDateString()}</p>
           </div>
           <div className={style.direita}>
-           <button className={style.botao} onClick={() => router.push(`/prontuario/${paciente.id_paciente}`)}> Ver prontuário</button> 
+            <button className={style.botao} onClick={() => router.push(`/prontuario/${paciente.id_paciente}`)}> Ver prontuário</button>
           </div>
         </div>
 
         <div className={style.baixo}>
           <div className={style.esquerda}>
             <button className={style.botao} onClick={() => setAgendarConsulta(true)}>Nova consulta</button>
-            <button className={style.botao} onClick={() => setEditarConsultas(true)}>Editar consulta</button>
           </div>
           <div className={`${style.direita} ${style.direitaBaixo}`}>
             <h3>Observações</h3>
@@ -153,6 +150,10 @@ const handleCancelarConsulta = async () => {
                 ? `Próxima consulta: ${new Date(consulta.data).toLocaleDateString()} às ${consulta.hora?.substring(0, 5)}`
                 : "Você não possui consultas marcadas no momento"}
             </p>
+            {/* O botão de editar consulta só aparece se houver uma consulta marcada */}
+            {consulta?.data && (
+              <button className={style.botao} onClick={() => setEditarConsultas(true)}>Editar consulta</button>
+            )}
           </div>
         </div>
       </div>
@@ -164,28 +165,26 @@ const handleCancelarConsulta = async () => {
             <h3>Agendar Consulta</h3>
             <form onSubmit={(e) => {
               e.preventDefault();
-              setShowConfirmacaoValores(true); 
+              setShowConfirmacaoValores(true);
             }}>
 
-              {/*select da tabela procedimento*/}
-
               <select 
-                  value={procedimentoSelecionado} 
-                  onChange={handleChangeProcedimento} 
-                  required 
-                  className={style.input}
-                >
-                  <option value="">Selecione um procedimento</option>
-                  {procedimento.length > 0 ? (
-                    procedimento.map((proc) => (
-                      <option key={proc.id_procedimento} value={proc.id_procedimento}>
-                        {proc.nome}
-                      </option>
-                    ))
-                  ) : (
-                    <option value="">Carregando procedimentos...</option>
-                  )}
-                </select>
+                value={procedimentoSelecionado} 
+                onChange={handleChangeProcedimento} 
+                required 
+                className={style.input}
+              >
+                <option value="">Selecione um procedimento</option>
+                {procedimento.length > 0 ? (
+                  procedimento.map((proc) => (
+                    <option key={proc.id_procedimento} value={proc.id_procedimento}>
+                      {proc.nome}
+                    </option>
+                  ))
+                ) : (
+                  <option value="">Carregando procedimentos...</option>
+                )}
+              </select>
 
               <Calendario className={style.input} selectedDate={dataHora} onDateChange={setDataHora} placeholder="Data e hora da consulta" mode="schedule"/>
               <button className={style.botaoModal} type="submit">Confirmar</button>
@@ -216,21 +215,21 @@ const handleCancelarConsulta = async () => {
             <form onSubmit={(e) => {e.preventDefault(); handleEditarConsulta();}}>
 
               <select 
-                  value={procedimentoSelecionado} 
-                  onChange={handleChangeProcedimento}  
-                  className={style.input}
-                >
-                  <option value="">Alterar procedimento</option>
-                  {procedimento.length > 0 ? (
-                    procedimento.map((proc) => (
-                      <option key={proc.id_procedimento} value={proc.id_procedimento}>
-                        {proc.nome}
-                      </option>
-                    ))
-                  ) : (
-                    <option value="">Carregando procedimentos...</option>
-                  )}
-                </select>
+                value={procedimentoSelecionado} 
+                onChange={handleChangeProcedimento}  
+                className={style.input}
+              >
+                <option value="">Alterar procedimento</option>
+                {procedimento.length > 0 ? (
+                  procedimento.map((proc) => (
+                    <option key={proc.id_procedimento} value={proc.id_procedimento}>
+                      {proc.nome}
+                    </option>
+                  ))
+                ) : (
+                  <option value="">Carregando procedimentos...</option>
+                )}
+              </select>
 
               <Calendario className={style.input} selectedDate={dataHora} onDateChange={setDataHora} placeholder="Alterar data e hora" mode="schedule" />
               <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
