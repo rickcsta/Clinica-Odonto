@@ -28,7 +28,7 @@ export default function ClienteView({ paciente, consulta }) {
   }, []);
 
   const fetchProcedimento = async () => {
-    const response = await fetch('/api/procedimento');
+    const response = await fetch('/api/procedimento/retornar');
     const proc = await response.json();
     setProcedimento(proc);
   };
