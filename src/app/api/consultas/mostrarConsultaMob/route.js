@@ -9,8 +9,7 @@ export async function GET() {
       FROM paciente p 
       JOIN consulta c ON p.id_paciente = c.id_paciente 
       JOIN procedimento_consulta pc ON c.id_consulta = pc.id_consulta 
-      JOIN procedimento pr ON pc.id_procedimento = pr.id_procedimento
-      WHERE DATE(c.data) = CURRENT_DATE;
+      JOIN procedimento pr ON pc.id_procedimento = pr.id_procedimento;
     `);
     client.release();
 
